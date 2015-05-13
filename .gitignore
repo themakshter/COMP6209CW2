@@ -2,3 +2,4 @@ bin
 *.cbp
 obj
 *.layout
+*.depend
