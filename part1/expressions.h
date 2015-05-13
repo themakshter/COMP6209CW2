@@ -11,7 +11,6 @@ class divideByZeroException:
     {
         return "Error! Cannot divide by zero!";
     }
-
 };
 
 
@@ -19,7 +18,7 @@ template <int i>
 class Value{
 public:
     static int eval(int x){
-        return x;
+        return i;
     }
 };
 
