@@ -99,8 +99,6 @@ class EXPRESSION{
 public:
     static inline int eval(int values[]) {
         index = 0;
-        printf("Lower bound of the equation is: %d\n", a::lowerBound);
-		printf("Upper bound of the equation is: %d\n", a::upperBound);
         return a::eval(values);
     }
 
