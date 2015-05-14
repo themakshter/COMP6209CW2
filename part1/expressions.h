@@ -19,7 +19,7 @@ class divideByZeroException:
 template <int i>
 class LITERALINTEGER{
 public:
-    static int eval(int x){
+    static inline int eval(int x) {
         return i;
     }
 };
@@ -27,7 +27,7 @@ public:
 // Variable, such as x
 class VARIABLE{
 public:
-    static int eval(int x){
+    static inline int eval(int x) {
         return x;
     }
 };
@@ -36,7 +36,7 @@ public:
 template<class a>
 class EXPRESSION{
 public:
-    static int eval(int x){
+    static inline int eval(int x) {
         return a::eval(x);
     }
 };
@@ -45,7 +45,7 @@ public:
 template<class a,class b>
 class ADD{
 public:
-        static int eval(int x){
+        static inline int eval(int x) {
             return a::eval(x) + b::eval(x);
         }
 };
@@ -54,7 +54,7 @@ public:
 template<class a, class b>
 class SUBTRACT{
 public:
-    static int eval(int x){
+    static inline int eval(int x) {
         return a::eval(x) - b::eval(x);
     }
 };
@@ -63,7 +63,7 @@ public:
 template<class a,class b>
 class MULTIPLY{
 public:
-    static int eval(int x){
+    static inline int eval(int x) {
         return a::eval(x) * b::eval(x);
     }
 };
@@ -72,7 +72,7 @@ public:
 template<class a,class b>
 class DIVIDE{
 public:
-    static int eval(int x){
+    static inline int eval(int x) {
         //throw exception if dividing by zero
         if(b::eval(x) == 0){
             throw divideByZeroException();

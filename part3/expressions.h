@@ -40,24 +40,7 @@ struct MAXIMUM
     };
 };
 
-
-//In all our expression relation classes, we will keep track of upper and lower bound values
-
-
-// Literal integer such as 1 or 2
-template <int i>
-class LITERALINTEGER{
-public:
-    static int eval(int x){
-        return i;
-    }
-    enum {
-		lowerBound = i,
-		upperBound = i
-	};
-
-};
-
+// Bounds class with upper and lower bounds
 template<int lower, int upper>
 class BOUNDS{
 public:
@@ -70,15 +53,37 @@ public:
 
 };
 
+//In all our expression relation classes, we will keep track of upper and lower bound values
+// Literal integer such as 1 or 2
+template <int i>
+class LITERALINTEGER{
+public:
+    static inline int eval(int values[]) {
+        return i;
+    }
+    enum {
+		lowerBound = i,
+		upperBound = i
+	};
+
+};
+
+//index to keep track of the array
+static int index;
+
 // Variable, such as x with a bounds class
 template<class b>
 class VARIABLE{
 public:
-    static int eval(int x){
-        if(x < b::lowerBound || x > b::upperBound){
+    static inline int eval(int values[]) {
+        if(values[index] < b::lowerBound || values[index] > b::upperBound){
             throw outOfBoundsException();
         }else{
-            return x;
+            //increment index but store it in temp value and use that for returning current value;
+            int temp = index;
+            index++;
+
+            return values[temp];
         }
     }
 
@@ -92,10 +97,11 @@ public:
 template<class a>
 class EXPRESSION{
 public:
-    static int eval(int x){
+    static inline int eval(int values[]) {
+        index = 0;
         printf("Lower bound of the equation is: %d\n", a::lowerBound);
 		printf("Upper bound of the equation is: %d\n", a::upperBound);
-        return a::eval(x);
+        return a::eval(values);
     }
 
     enum {
@@ -109,8 +115,8 @@ public:
 template<class a,class b>
 class ADD{
 public:
-        static int eval(int x){
-            return a::eval(x) + b::eval(x);
+        static inline int eval(int values[]) {
+            return a::eval(values) + b::eval(values);
         }
 
         enum {
@@ -124,8 +130,8 @@ public:
 template<class a, class b>
 class SUBTRACT{
 public:
-    static int eval(int x){
-        return a::eval(x) - b::eval(x);
+    static inline int eval(int values[]) {
+        return a::eval(values) - b::eval(values);
     }
 
      enum {
@@ -139,8 +145,8 @@ public:
 template<class a,class b>
 class MULTIPLY{
 public:
-    static int eval(int x){
-        return a::eval(x) * b::eval(x);
+    static inline int eval(int values[]) {
+        return a::eval(values) * b::eval(values);
     }
 
     //need to try all the combos and get the minimum possible values for them
@@ -156,12 +162,12 @@ public:
 template<class a,class b>
 class DIVIDE{
 public:
-    static int eval(int x){
+    static inline int eval(int values[]) {
         //throw exception if dividing by zero
-        if(b::eval(x) == 0){
+        if(b::eval(values) == 0){
             throw divideByZeroException();
         }else{
-            return a::eval(x) / b::eval(x);
+            return a::eval(values) / b::eval(values);
         }
     }
 

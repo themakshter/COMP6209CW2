@@ -4,17 +4,11 @@
 
 int main()
 {
-    //values
-    int variable = 4;
-    const int lowerBound = 0;
-    const int upperBound = 5;
-
-    //(x + 3) * (x + 5) with bounds (0,5)
-    typedef EXPRESSION<MULTIPLY<ADD<VARIABLE<BOUNDS<lowerBound,upperBound>>,LITERALINTEGER<3>>,ADD<VARIABLE<BOUNDS<lowerBound,upperBound>>,LITERALINTEGER<5>>>> expr;
-
+    // x + (y - 2) * (z - 3), x bounds are (0,4), y bounds are (0,6), z bounds are (0,3)
+    typedef EXPRESSION<ADD<VARIABLE<BOUNDS<0,4>>,MULTIPLY<SUBTRACT<VARIABLE<BOUNDS<0,6>>,LITERALINTEGER<2>>,SUBTRACT<VARIABLE<BOUNDS<0,3>>,LITERALINTEGER<3>>>>> expr;
 
     try{
-        printf("Value of the expression with x=%d is: %d\n",variable,expr::eval(variable));
+        //printf("Value of the expression with x=%d is: %d\n",variable,expr::eval(variable));
     }catch(exception &e){
         cout << e.what() << endl;
     }

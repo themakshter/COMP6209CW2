@@ -48,7 +48,7 @@ struct MAXIMUM
 template <int i>
 class LITERALINTEGER{
 public:
-    static int eval(int x){
+    static inline int eval(int x) {
         return i;
     }
     enum {
@@ -74,7 +74,7 @@ public:
 template<class b>
 class VARIABLE{
 public:
-    static int eval(int x){
+    static inline int eval(int x) {
         if(x < b::lowerBound || x > b::upperBound){
             throw outOfBoundsException();
         }else{
@@ -92,7 +92,7 @@ public:
 template<class a>
 class EXPRESSION{
 public:
-    static int eval(int x){
+    static inline int eval(int x) {
         printf("Lower bound of the equation is: %d\n", a::lowerBound);
 		printf("Upper bound of the equation is: %d\n", a::upperBound);
         return a::eval(x);
@@ -109,7 +109,7 @@ public:
 template<class a,class b>
 class ADD{
 public:
-        static int eval(int x){
+        static inline int eval(int x) {
             return a::eval(x) + b::eval(x);
         }
 
@@ -124,7 +124,7 @@ public:
 template<class a, class b>
 class SUBTRACT{
 public:
-    static int eval(int x){
+    static inline int eval(int x) {
         return a::eval(x) - b::eval(x);
     }
 
@@ -139,7 +139,7 @@ public:
 template<class a,class b>
 class MULTIPLY{
 public:
-    static int eval(int x){
+    static inline int eval(int x) {
         return a::eval(x) * b::eval(x);
     }
 
@@ -156,7 +156,7 @@ public:
 template<class a,class b>
 class DIVIDE{
 public:
-    static int eval(int x){
+    static inline int eval(int x) {
         //throw exception if dividing by zero
         if(b::eval(x) == 0){
             throw divideByZeroException();
