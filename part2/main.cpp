@@ -34,9 +34,8 @@ int main()
     printf("Upper bounds of the equation is : %d\n",maxBounds);
 
 */
-    printf("Value of the expression with x=%d is: ",variable);
     try{
-        printf("%d\n",expr::eval(variable));
+        printf("Value of the expression with x=%d is: %d\n",variable,expr::eval(variable));
     }catch(exception &e){
         cout << e.what() << endl;
     }

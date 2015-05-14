@@ -90,6 +90,8 @@ template<class a>
 class EXPRESSION{
 public:
     static int eval(int x){
+        printf("Lower bound of the equation is: %d\n", a::lowerBound);
+		printf("Upper bound of the equation is: %d\n", a::upperBound);
         return a::eval(x);
     }
 
@@ -139,8 +141,8 @@ public:
     }
 
     enum {
-        lowerBound = MINIMUM<MINIMUM<a::lowerBound * b::lowerBound,a::lowerBound * b::upperBound>::apply,MINIMUM<a::upperBound * b::lowerBound,a::upperBound * b::upperBound>::apply>::apply;
-        upperBound = MAXIMUM<MAXIMUM<a::lowerBound * b::lowerBound,a::lowerBound * b::upperBound>::apply,MAXIMUM<a::upperBound * b::lowerBound,a::upperBound * b::upperBound>::apply>::apply;
+        lowerBound = MINIMUM<MINIMUM<a::lowerBound * b::lowerBound,a::lowerBound * b::upperBound>::apply,MINIMUM<a::upperBound * b::lowerBound,a::upperBound * b::upperBound>::apply>::apply,
+        upperBound = MAXIMUM<MAXIMUM<a::lowerBound * b::lowerBound,a::lowerBound * b::upperBound>::apply,MAXIMUM<a::upperBound * b::lowerBound,a::upperBound * b::upperBound>::apply>::apply
     };
 
 
@@ -159,10 +161,11 @@ public:
         }
     }
 
-     enum {
-            lowerBound = a::lowerBound + b::lowerBound,
-            upperBound = a::upperBound + b::upperBound
-        };
+    enum {
+        lowerBound = MINIMUM<MINIMUM<a::lowerBound / b::lowerBound,a::lowerBound / b::upperBound>::apply,MINIMUM<a::upperBound / b::lowerBound,a::upperBound / b::upperBound>::apply>::apply,
+        upperBound = MAXIMUM<MAXIMUM<a::lowerBound / b::lowerBound,a::lowerBound / b::upperBound>::apply,MAXIMUM<a::upperBound / b::lowerBound,a::upperBound / b::upperBound>::apply>::apply
+    };
+
 
 
 };
