@@ -22,6 +22,25 @@ class divideByZeroException:
     };
 
 
+template<int a,int b>
+struct MINIMUM
+{
+    enum {
+        apply =((a < b) ? a: b)
+    };
+
+};
+
+template<int a,int b>
+struct MAXIMUM
+{
+    enum {
+        apply = ((a > b) ? a : b)
+    };
+};
+
+
+
 // Literal integer such as 1 or 2
 template <int i>
 class LITERALINTEGER{
@@ -29,18 +48,22 @@ public:
     static int eval(int x){
         return i;
     }
+    enum {
+		lowerBound = i,
+		upperBound = i
+	};
+
 };
 
 template<int lower, int upper>
 class BOUNDS{
 public:
-    static int lowerBound(){
-        return lower;
-    }
 
-    static int upperBound(){
-        return upper;
-    }
+
+    enum {
+		lowerBound = lower,
+		upperBound = upper
+	};
 
 };
 
@@ -49,12 +72,17 @@ template<class b>
 class VARIABLE{
 public:
     static int eval(int x){
-        if(x < b::lowerBound() || x > b::upperBound()){
+        if(x < b::lowerBound || x > b::upperBound){
             throw outOfBoundsException();
         }else{
             return x;
         }
     }
+
+    enum {
+		lowerBound = b::lowerBound,
+		upperBound = b::upperBound
+	};
 };
 
 // A complete expression such as x + (x+2) * (x+3)
@@ -64,6 +92,12 @@ public:
     static int eval(int x){
         return a::eval(x);
     }
+
+    enum {
+		lowerBound = a::lowerBound,
+		upperBound = a::upperBound
+	};
+
 };
 
 // Addition such as 1 + 2
@@ -73,6 +107,12 @@ public:
         static int eval(int x){
             return a::eval(x) + b::eval(x);
         }
+
+        enum {
+            lowerBound = a::lowerBound + b::lowerBound,
+            upperBound = a::upperBound + b::upperBound
+        };
+
 };
 
 // Subtraction such as 2 - 1
@@ -82,6 +122,12 @@ public:
     static int eval(int x){
         return a::eval(x) - b::eval(x);
     }
+
+     enum {
+            lowerBound = a::lowerBound - b::lowerBound,
+            upperBound = a::upperBound - b::upperBound
+    };
+
 };
 
 // Multiplication such as 3 * 5
@@ -91,6 +137,8 @@ public:
     static int eval(int x){
         return a::eval(x) * b::eval(x);
     }
+
+
 };
 
 // Division such as 99/9
@@ -105,6 +153,13 @@ public:
             return a::eval(x) / b::eval(x);
         }
     }
+
+     enum {
+            lowerBound = a::lowerBound + b::lowerBound,
+            upperBound = a::upperBound + b::upperBound
+        };
+
+
 };
 
 #endif // EXPRESSIONS_H_INCLUDED

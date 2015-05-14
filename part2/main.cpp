@@ -12,6 +12,7 @@ int main()
     //(x + 3) * (x + 5) with bounds (0,5)
     typedef EXPRESSION<MULTIPLY<SUBTRACT<VARIABLE<BOUNDS<lowerBound,upperBound>>,LITERALINTEGER<3>>,SUBTRACT<VARIABLE<BOUNDS<lowerBound,upperBound>>,LITERALINTEGER<5>>>> expr;
 
+/*
     //calculating the upper and lower bounds by iterating through all values in case it exists somewhere in the middle
     int maxBounds = numeric_limits<int>::min();
     int minBounds = numeric_limits<int>::max();
@@ -32,6 +33,7 @@ int main()
     printf("Lower bounds of the equation is : %d\n",minBounds);
     printf("Upper bounds of the equation is : %d\n",maxBounds);
 
+*/
     printf("Value of the expression with x=%d is: ",variable);
     try{
         printf("%d\n",expr::eval(variable));
