@@ -6,10 +6,10 @@
 using namespace std;
 
 // Exception for out of range variable values
-class outOfRangeException:
+class outOfBoundsException:
     public exception{
         virtual const char* what() const throw(){
-            return "Error! The variable value is outside of the bounds set!"
+            return "Error! The variable value is outside of the bounds set!";
         }
     };
 
@@ -31,11 +31,29 @@ public:
     }
 };
 
-// Variable, such as x
+template<int lower, int upper>
+class BOUNDS{
+public:
+    static int lowerBound(){
+        return lower;
+    }
+
+    static int upperBound(){
+        return upper;
+    }
+
+};
+
+// Variable, such as x with a bounds class
+template<class b>
 class VARIABLE{
 public:
     static int eval(int x){
-        return x;
+        if(x < b::lowerBound() || x > b::upperBound()){
+            throw outOfBoundsException();
+        }else{
+            return x;
+        }
     }
 };
 
