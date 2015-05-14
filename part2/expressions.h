@@ -138,6 +138,11 @@ public:
         return a::eval(x) * b::eval(x);
     }
 
+    enum {
+        lowerBound = MINIMUM<MINIMUM<a::lowerBound * b::lowerBound,a::lowerBound * b::upperBound>::apply,MINIMUM<a::upperBound * b::lowerBound,a::upperBound * b::upperBound>::apply>::apply;
+        upperBound = MAXIMUM<MAXIMUM<a::lowerBound * b::lowerBound,a::lowerBound * b::upperBound>::apply,MAXIMUM<a::upperBound * b::lowerBound,a::upperBound * b::upperBound>::apply>::apply;
+    };
+
 
 };
 
