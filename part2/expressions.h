@@ -21,7 +21,7 @@ class divideByZeroException:
         }
     };
 
-
+//Template for finding smaller value out of two
 template<int a,int b>
 struct MINIMUM
 {
@@ -31,6 +31,7 @@ struct MINIMUM
 
 };
 
+//Template for finding larger value out of two
 template<int a,int b>
 struct MAXIMUM
 {
@@ -39,6 +40,8 @@ struct MAXIMUM
     };
 };
 
+
+//In all our expression relation classes, we will keep track of upper and lower bound values
 
 
 // Literal integer such as 1 or 2
@@ -140,6 +143,7 @@ public:
         return a::eval(x) * b::eval(x);
     }
 
+    //need to try all the combos and get the minimum possible values for them
     enum {
         lowerBound = MINIMUM<MINIMUM<a::lowerBound * b::lowerBound,a::lowerBound * b::upperBound>::apply,MINIMUM<a::upperBound * b::lowerBound,a::upperBound * b::upperBound>::apply>::apply,
         upperBound = MAXIMUM<MAXIMUM<a::lowerBound * b::lowerBound,a::lowerBound * b::upperBound>::apply,MAXIMUM<a::upperBound * b::lowerBound,a::upperBound * b::upperBound>::apply>::apply
@@ -161,6 +165,7 @@ public:
         }
     }
 
+    // need to try out all possible combinations and find min and max from them
     enum {
         lowerBound = MINIMUM<MINIMUM<a::lowerBound / b::lowerBound,a::lowerBound / b::upperBound>::apply,MINIMUM<a::upperBound / b::lowerBound,a::upperBound / b::upperBound>::apply>::apply,
         upperBound = MAXIMUM<MAXIMUM<a::lowerBound / b::lowerBound,a::lowerBound / b::upperBound>::apply,MAXIMUM<a::upperBound / b::lowerBound,a::upperBound / b::upperBound>::apply>::apply
