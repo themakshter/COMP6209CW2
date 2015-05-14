@@ -4,11 +4,13 @@
 int main()
 {
     int variable = 6;
-    //(x + 3) * (x + 5)
-    typedef EXPRESSION< MULTIPLY< ADD< VARIABLE< BOUNDS<0,5> >,LITERALINTEGER<3>>,ADD<VARIABLE< BOUNDS<0,5>> ,LITERALINTEGER<5>> > > expr;
-
+    const int lowerBound = 0;
+    const int upperBound = 5;
+    //(x + 3) * (x + 5) with bounds (0,5)
+    typedef EXPRESSION<MULTIPLY<ADD<VARIABLE<BOUNDS<lowerBound,upperBound>>,LITERALINTEGER<3>>,ADD<VARIABLE<BOUNDS<lowerBound,upperBound>>,LITERALINTEGER<5>>>> expr;
+    printf("Value of the expression with x=%d is: ",variable);
     try{
-        printf("Value of the expression with x=%d is %d\n",variable,expr::eval(variable));
+        printf("%d\n",expr::eval(variable));
     }catch(exception &e){
         cout << e.what() << endl;
     }
