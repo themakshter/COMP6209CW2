@@ -14,25 +14,25 @@ int main()
         values[0] = 2;
         values[1] = 4;
         values[2] = 1;
-        results[1] = expr::eval(values);
+        results[0] = expr::eval(values);
 
         // x = 0, y = 3, z = 2
         values[0] = 0;
         values[1] = 3;
         values[2] = 2;
-        results[2] = expr::eval(values);
+        results[1] = expr::eval(values);
 
         // x = 1, y = 1, z = 1
         values[0] = 1;
         values[1] = 1;
         values[2] = 1;
-        results[3] = expr::eval(values);
+        results[2] = expr::eval(values);
 
         // x = 4, y = 6, z = 3
         values[0] = 4;
         values[1] = 6;
         values[2] = 3;
-        results[4] = expr::eval(values);
+        results[3] = expr::eval(values);
 
         for(int i = 0;i < 4; i++){
             printf("results[%d]: %d\n",i,results[i]);
